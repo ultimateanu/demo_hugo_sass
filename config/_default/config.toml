@@ -1,0 +1,7 @@
+baseURL = "https://customweb.page/"
+languageCode = "en-us"
+title = "CustomWeb"
+pluralizelisttitles = false
+enableRobotsTXT = true
+[params]
+  EnableGoogleAnalytics = false

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FAILS: Hugo Sever doesn't auto update when changed -->
+  {{ $aCSS := resources.Get "style/a.scss" | resources.ToCSS}}
+  {{ $bCSS := resources.Get "style/b.scss" | resources.ToCSS}}
+  {{ $cCSS := resources.Get "style/c.scss" | resources.ToCSS}}
+  {{ $mergedCSS := slice $aCSS $bCSS $cCSS  | resources.Concat "css_bundle.css" | resources.Minify | resources.Fingerprint "sha256" }}
+  <link rel="stylesheet" href="{{ $mergedCSS.RelPermalink }}">
+
+  <!-- WORKS: Hugo Sever does auto update when changed -->
+  {{ $soloCSS := resources.Get "style/solo.scss" | resources.ToCSS}}
+  <link rel="stylesheet" href="{{ $soloCSS.RelPermalink }}">
+
+</head>
+
+<body>
+  <div class="a"> A div</div>
+  <div class="b"> B div</div>
+  <div class="c"> C div</div>
+  <div class="solo"> SOLO div</div>
+</body>
+
+</html>
